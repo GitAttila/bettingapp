@@ -1,0 +1,33 @@
+.team-card {
+  &__wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+  }
+  &__avatar-wrapper {
+    flex-grow: 1;
+    flex-basis: 30%;
+    margin: 1rem;
+  }
+  &__avatar-image {
+    width: 80%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+  &__description {
+    margin: 1rem;
+    flex-grow: 3;
+    flex-basis: 70%;
+    &--title {
+      font-size: 1.4rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+    &--text {
+      font-size: 1.1rem;
+    }
+  }
+}

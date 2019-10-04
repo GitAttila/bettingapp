@@ -1,0 +1,79 @@
+.bets-table {
+  margin: 2rem 0;
+  &__w100 {
+    width: 100%;
+  }
+  &__menu{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    mat-slider {
+      min-width: 300px;
+    }
+    &__btn-group {
+      button {
+        margin-left: 1rem;
+      }
+    }
+  }
+  &__row {
+    &:not(.bets-table__expanded-row):hover, &:not(.bets-table__expanded-row):active {
+      background-color: mat-color($betsys-app-accent, 100);
+      td {
+        color: mat-contrast($betsys-app-accent, 300);
+        cursor: pointer;
+      }
+    }
+  }
+  &__expanded-row {
+    td.mat-cell {
+      border-bottom-width: 0;
+    }
+  }
+  &__detail__row {
+    td.mat-cell {
+      border-bottom-width: 0;
+    }
+  }
+  tr.bets-table__detail__row {
+    height: 0;
+  }
+  &__detail {
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  &__team-wrapper{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include atMedium {
+      width: 50%;
+    }
+  }
+  &__team-avatar-wrapper {
+    flex-grow: 1;
+    flex-basis: 30%;
+    margin: 1rem;
+  }
+  &__team-avatar-image {
+    width: 80%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+  &__team-description {
+    margin: 1rem;
+    flex-grow: 3;
+    flex-basis: 70%;
+    &--title {
+      font-size: 1.4rem;
+      font-weight: bold;
+    }
+    &--text {
+      font-size: 1.1rem;
+    }
+  }
+}

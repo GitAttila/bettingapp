@@ -1,0 +1,8 @@
+@import "../../../assets/scss/base/mixins";
+:host {
+  overflow: hidden;
+  flex: 1 1 100%;
+  @include atMedium {
+    flex: 1 1 50%;
+  }
+}

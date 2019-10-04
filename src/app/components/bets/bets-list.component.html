@@ -1,0 +1,66 @@
+<div *ngIf= "!dataSource">
+  <div class = "message__wrapper">
+      <mat-icon class="message__icon">info</mat-icon>
+      <p class="message__text">No data available!</p>
+  </div>
+</div>
+
+<div
+  *ngIf= "dataSource"
+  class= "bets-table">
+    <mat-card class="mat-elevation-z2">
+      <mat-card-content>
+        <div class ="bets-table__menu" >
+            <div class ="bets-table__menu__btn-group">
+            <mat-slider
+              [disabled]="slider.disabled"
+              [max]="slider.max"
+              [min]="slider.min"
+              [thumbLabel]="true"
+              [(ngModel)]="slider.value">
+            </mat-slider>
+            <button
+              (click) = "generateNewBets()"
+              class = "bets-table__menu__item"
+              mat-raised-button color="primary">GENERATE NEW BETS</button>
+          </div>
+            <button
+              (click) = "onLivePullBtnClicked()"
+              class= "bets-table__menu__item"
+              mat-raised-button
+              color="accent">{{btnLivePullText | uppercase}}</button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+    <table
+      mat-table
+      [dataSource]="dataSource" multiTemplateDataRows
+      class="mat-elevation-z3 bets-table bets-table__w100">
+      <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
+        <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+        <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="expandedDetail">
+        <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+          <div class="bets-table__detail"
+              [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+
+            <app-team-card [teamDataItem]=element.teams[0]></app-team-card>
+            <app-team-card [teamDataItem]=element.teams[1]></app-team-card>
+
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+      <tr mat-row *matRowDef="let element; columns: columnsToDisplay;"
+          class="bets-table__row"
+          [class.bets-table__expanded-row]="expandedElement === element"
+          (click)="expandedElement = expandedElement === element ? null : element">
+      </tr>
+      <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="bets-table__detail__row"></tr>
+    </table>
+</div>
+
+

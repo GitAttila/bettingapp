@@ -1,0 +1,13 @@
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+$betsys-app-primary: mat-palette($mat-teal);
+$betsys-app-accent: mat-palette($mat-amber);
+$betsys-app-warn: mat-palette($mat-red);
+$betsys-app-theme: mat-light-theme($betsys-app-primary, $betsys-app-accent, $betsys-app-warn);
+$foreground: map_get($betsys-app-theme, foreground);
+$background: map_get($betsys-app-theme, background);
+
+@include angular-material-theme($betsys-app-theme);
+

@@ -1,0 +1,32 @@
+<mat-card class= "bet-card mat-elevation-z3">
+  <div
+    *ngIf = "isLoading"
+    class="app-spinner__wrapper">
+    <mat-spinner
+      class="app-spinner"
+      color="accent">
+    </mat-spinner>
+  </div>
+
+  <div *ngIf = "!isLoading">
+    <mat-card-header>
+        <button
+          class = "bet-card--order-1 bet-card__btn-back"
+          routerLink="/bets"
+          mat-icon-button
+          color="primary">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+        <span class = "bet-card--order-2">
+            <mat-card-title>{{cardData.match}}</mat-card-title>
+            <mat-card-subtitle>home: {{cardData.home}} draw: {{cardData.draw}} away: {{cardData.away}}</mat-card-subtitle>
+        </span>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="bet-card__teams-wrapper">
+          <app-team-card [teamDataItem]=cardData.teams[0] class="bet-card__team"></app-team-card>
+          <app-team-card [teamDataItem]=cardData.teams[1] class="bet-card__team"></app-team-card>
+      </div>
+    </mat-card-content>
+  </div>
+</mat-card>

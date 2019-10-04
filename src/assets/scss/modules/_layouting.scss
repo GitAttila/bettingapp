@@ -1,0 +1,19 @@
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  width: 100%;
+  @include atSmall {
+    max-width: calc(576px - 2rem);
+  }
+  @include atMedium {
+    max-width: calc(768px - 2rem);
+  }
+  @include  atLarge {
+    max-width: calc(992px - 2rem);
+  }
+  @include  atExtraLarge {
+    max-width: calc(1200px - 2rem);
+  }
+}

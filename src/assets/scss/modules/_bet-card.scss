@@ -1,0 +1,22 @@
+.bet-card {
+  margin: 2rem 0;
+  &--order-1 {
+    order: 1
+  }
+  &--order-2 {
+    order: 2
+  }
+  &__btn-back {
+    margin-right: 1rem!important;
+  }
+  &__teams-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  &__team {
+    flex: 1 1 100%;
+  }
+}

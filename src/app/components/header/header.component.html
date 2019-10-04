@@ -1,0 +1,22 @@
+<mat-toolbar>
+  <mat-toolbar-row class="mat-elevation-z6">
+    <div class="container">
+        <div class = "app-header__logo-wrapper">
+            <img
+            routerLink="/"
+              src="../../../assets/images/betsys-logo-white.png" alt="Betsys logo white">
+        </div>
+    </div>
+  </mat-toolbar-row>
+  <mat-toolbar-row class ="app-header__subheader">
+    <div class="container">
+        <span
+          [matBadge]=numOfBets
+          [matBadgeHidden]=badgeHidden
+          matBadgeOverlap="false"
+          matBadgeColor="accent">{{submenuTitle}}</span>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+
