@@ -38,7 +38,14 @@
       class="mat-elevation-z3 bets-table bets-table__w100">
       <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
         <th mat-header-cell *matHeaderCellDef> {{column}} </th>
-        <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+        <td mat-cell *matCellDef="let element"> {{element[column]}}
+          <button
+            *ngIf = "column === 'edit'"
+            mat-icon-button
+            [routerLink]="['/bets', element.id]">
+            <mat-icon>navigate_next</mat-icon>
+          </button>
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="expandedDetail">

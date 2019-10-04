@@ -26,12 +26,12 @@ export class BetComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     this.route.url.subscribe((url) => {
       const urlSeg = url[0].path || '';
-      const urlSegId = parseInt(url[1].path, 10) || '';
+      const urlSegId = parseInt(url[1].path, 10);
       if (urlSeg === 'bets' && typeof urlSegId === 'number') {
         this.betSub = this.commSvc.getBet(urlSegId)
           // this is a short delay to show the spinner
           .pipe(
-            delay(1000)
+            delay(500)
           )
           .subscribe((singleBet) => {
             this.cardData = singleBet[0];

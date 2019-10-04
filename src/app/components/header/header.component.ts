@@ -36,11 +36,12 @@ export class HeaderComponent implements OnInit {
           return navEnd instanceof NavigationEnd;
         })
       )
-      .subscribe((endpoint) => {
-        if (endpoint.url === '/bets') {
+      .subscribe((endpoint: NavigationEnd) => {
+        console.log(endpoint.urlAfterRedirects);
+        if (endpoint.urlAfterRedirects === '/bets') {
           this.submenuTitle = 'List of sports bets';
           this.badgeHidden = false;
-        } else if (endpoint.url.search('/bets/') > 0 ) {
+        } else if (endpoint.urlAfterRedirects.search('/bets/') >= 0 ) {
           this.submenuTitle = 'Sports bet detail';
           this.badgeHidden = true;
         } else {
@@ -48,7 +49,6 @@ export class HeaderComponent implements OnInit {
           this.badgeHidden = true;
         }
       });
-
   }
 
   ngOnDeestroy() {

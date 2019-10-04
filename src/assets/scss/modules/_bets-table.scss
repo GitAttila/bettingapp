@@ -1,5 +1,8 @@
 .bets-table {
   margin: 2rem 0;
+  td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:first-of-type {
+    max-width: 20rem;
+  }
   &__w100 {
     width: 100%;
   }
@@ -19,9 +22,9 @@
   }
   &__row {
     &:not(.bets-table__expanded-row):hover, &:not(.bets-table__expanded-row):active {
-      background-color: mat-color($betsys-app-accent, 100);
+      background-color: mat-color($betsys-app-primary, 600);
       td {
-        color: mat-contrast($betsys-app-accent, 300);
+        color: mat-contrast($betsys-app-accent, 500);
         cursor: pointer;
       }
     }
