@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { IBetItem } from '../../models/bet.model';
 
 @Component({
@@ -6,9 +6,7 @@ import { IBetItem } from '../../models/bet.model';
   templateUrl: './team-card.component.html',
   styleUrls: ['./team-card.component.scss']
 })
-export class TeamCardComponent implements OnInit {
+export class TeamCardComponent {
   @Input()teamDataItem: IBetItem;
 
-  ngOnInit() {
-  }
 }

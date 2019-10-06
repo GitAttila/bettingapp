@@ -1,5 +1,10 @@
 .bets-table {
   margin: 2rem 0;
+  position: relative;
+  z-index: 1;
+  table {
+    background-color: mat-color($betsys-app-primary, 800, 0.4);
+  }
   td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:first-of-type {
     max-width: 20rem;
   }
@@ -26,6 +31,7 @@
       td {
         color: mat-contrast($betsys-app-accent, 500);
         cursor: pointer;
+        transition: 0.3s color ease-in-out;
       }
     }
   }
@@ -78,5 +84,21 @@
     &--text {
       font-size: 1.1rem;
     }
+  }
+  &__item-highlighted {
+    color: mat-color($betsys-app-accent, 500);
+  }
+  &__image-wrapper {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 0;
+    img {
+      width: 100%;
+    }
+  }
+  .mat-card {
+    background-color: mat-color($betsys-app-primary, 800, 0.67);
   }
 }
