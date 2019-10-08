@@ -91,6 +91,8 @@ THE SOFTWARE.
 
 @angular/material/icon
 
+@angular/material/menu
+
 @angular/material/progress-spinner
 
 @angular/material/slider
@@ -103,6 +105,12 @@ THE SOFTWARE.
 MIT
 
 @angular/router
+MIT
+
+@ngx-translate/core
+MIT
+
+@ngx-translate/http-loader
 MIT
 
 after

@@ -2,6 +2,7 @@
 
 # compiled output
 /dist
+/backend/angularapp/*
 /tmp
 /out-tsc
 # Only exists if Bazel was run
@@ -42,7 +43,7 @@ yarn-error.log
 testem.log
 /typings
 .BridgeSort
-.zip
+*.zip
 
 # System Files
 .DS_Store
