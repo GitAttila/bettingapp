@@ -15,7 +15,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
 
-  public submenuTitle = 'List of sports bets';
+  public submenuTitle = 'INTRO.TITLE';
   public badgeHidden = true;
   public numOfBets: number;
   private betsSub: Subscription;
@@ -67,13 +67,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
       )
       .subscribe((endpoint: NavigationEnd) => {
         if (endpoint.urlAfterRedirects === '/bets') {
-          this.submenuTitle = 'List of sports bets';
+          this.submenuTitle = 'BETS.TITLE';
           this.badgeHidden = false;
         } else if (endpoint.urlAfterRedirects.search('/bets/') >= 0 ) {
-          this.submenuTitle = 'Sports bet detail';
+          this.submenuTitle = 'BET_DETAIL.TITLE';
           this.badgeHidden = true;
         } else {
-          this.submenuTitle = 'Welcome to SportsBets App';
+          this.submenuTitle = 'INTRO.TITLE';
           this.badgeHidden = true;
         }
       });

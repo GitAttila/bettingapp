@@ -36,6 +36,9 @@
         }
       }
     }
+    button {
+      text-transform: uppercase;
+    }
   }
   &__row {
     &:not(.bets-table__expanded-row):hover, &:not(.bets-table__expanded-row):active {
