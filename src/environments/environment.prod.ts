@@ -1,8 +1,7 @@
 export const environment = {
   production: true,
   socketConfig: {
-    url: 'http://localhost:3000/',
+    url: 'http://betsys-assesment.eu-central-1.elasticbeanstalk.com',
     options: {}
-  },
-  webSocketUrl: 'ws://localhost:3000'
+  }
 };

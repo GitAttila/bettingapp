@@ -1,0 +1,7 @@
+.lang {
+  &__item {
+    &--selected {
+      color: mat-color($betsys-app-accent, 500);
+    }
+  }
+}

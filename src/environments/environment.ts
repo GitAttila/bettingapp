@@ -5,10 +5,9 @@
 export const environment = {
   production: false,
   socketConfig: {
-    url: 'http://localhost:3000/',
+    url: 'http://localhost:3000',
     options: {}
-  },
-  webSocketUrl: 'ws://localhost:3000'
+  }
 };
 
 /*

@@ -10,7 +10,8 @@ const BetFarmerBuilder = require('./BetFarm');
 let betFarm = new BetFarmerBuilder(100);
 let PULLING_RATE = 3;
 
-app.use('/backend/logos', express.static(path.join('backend/logos')));
+app.use('/backend/logos', express.static(path.join(__dirname, 'logos')));
+app.use('/', express.static(path.join(__dirname, 'angularapp')));
 
 app.use((req, res, next) => {
   res.header(`Access-Control-Allow-Origin`, `*`);
@@ -18,9 +19,9 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/',(req, resp) => {
-  resp.json({ ok: 1 });
-});
+// app.get('/',(req, resp) => {
+//   resp.json({ ok: 1 });
+// });
 
 app.get('/bets', (req, resp) => {
   resp.json(betFarm.bets);
@@ -66,6 +67,10 @@ app.get('/pulling/start', (req, resp) => {
 app.get('/pulling/stop', (req, resp) => {
   betFarm.stopPulling();
   resp.json({ ok: 1 });
+});
+
+app.use((req, res, next) => {
+  res.sendFile(path.join(__dirname, 'angularapp', 'index.html'));
 });
 
 http.listen(port, () => console.log(`listening on port ${port}`));

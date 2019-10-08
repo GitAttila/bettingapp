@@ -1,0 +1,15 @@
+{
+  "INTRO": {
+    "BTN": "Ukaž sázky",
+    "TITLE": "Vítejte v aplikaci pro sázení"
+  },
+  "BETS": {
+    "TITLE": "Seznam sázek",
+    "BTN_GENERATE": "Generuj nové sázky",
+    "BTN_LIVE_START": "Spusť živý přenos",
+    "BTN_LIVE_STOP": "Zastav živý přenos"
+  },
+  "BET_DETAIL": {
+    "TITLE": "Detailní náhled"
+  }
+}

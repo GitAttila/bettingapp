@@ -1,0 +1,15 @@
+{
+  "INTRO": {
+    "BTN": "take me to bets",
+    "TITLE": "Welcome to SportsBets App"
+  },
+  "BETS": {
+    "TITLE": "List of sports bets",
+    "BTN_GENERATE": "Generate New Bets",
+    "BTN_LIVE_START": "Start Live Pull",
+    "BTN_LIVE_STOP": "Stop Live Pull"
+  },
+  "BET_DETAIL": {
+    "TITLE": "Sports bets detail"
+  }
+}

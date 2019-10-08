@@ -3,8 +3,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { IBet } from '../../models/bet.model';
 import { CommunicationService } from '../../services/comm.service';
 import { ITransformedBet } from '../../models/bet-transformed.model';
-import { Subscription, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-bets-list',
@@ -23,8 +22,7 @@ export class BetsListComponent implements OnInit, OnDestroy {
   dataSource: ITransformedBet[];
   dataBeforeChange: ITransformedBet[];
   subBets: Subscription;
-  private destroyed = new Subject<void>();
-
+  subStream: Subscription;
   columnsToDisplay = ['match', 'home', 'draw', 'away', 'detail'];
   expandedElement: IBet | null;
 
@@ -45,17 +43,16 @@ export class BetsListComponent implements OnInit, OnDestroy {
 
   onLivePullBtnClicked() {
     if (this.btnLivePullText === 'stop live pull') {
-      this.btnLivePullText = 'start live pull';
-      this.communicationSvc.stopSocketStream();
-      this.dataBeforeChange = this.dataSource;
-      this.destroyed.next();
-      this.destroyed.complete();
+      this.communicationSvc.stopSocketStream().subscribe(
+        () => {
+          this.btnLivePullText = 'start live pull';
+          this.subStream.unsubscribe();
+          this.dataBeforeChange = this.dataSource;
+        }
+      );
     } else if (this.btnLivePullText === 'start live pull') {
       this.btnLivePullText = 'stop live pull';
-      this.communicationSvc.startSocketStream()
-        .pipe(
-          takeUntil(this.destroyed)
-        )
+      this.subStream = this.communicationSvc.startSocketStream()
         .subscribe(
           (data) => {
             this.dataBeforeChange = this.dataSource;
@@ -108,13 +105,19 @@ export class BetsListComponent implements OnInit, OnDestroy {
       .subscribe((betsData: {bets: ITransformedBet[], betsCount: number}) => {
         this.dataSource = betsData.bets;
         this.dataBeforeChange = this.dataSource;
+        this.slider.value = betsData.betsCount;
       });
   }
 
   ngOnDestroy() {
     this.communicationSvc.stopSocketStream();
     this.subBets.unsubscribe();
-    this.destroyed.next();
-    this.destroyed.complete();
+    if (this.btnLivePullText === 'stop live pull') {
+    this.communicationSvc.stopSocketStream()
+      .subscribe(
+        () => {
+          this.subStream.unsubscribe();
+        });
+    }
   }
 }

@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { IBet } from '../models/bet.model';
-import { map, switchMap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Subject, Observable, Subscription } from 'rxjs';
 import { ITransformedBet } from '../models/bet-transformed.model';
 import { Socket } from 'ngx-socket-io';
+import { environment } from '../../environments/environment';
 
-const BACKEND_URL = 'http://localhost:3000';
+const BACKEND_URL = environment.socketConfig.url;
 const BETS_ENDPOINT = '/bets/';
-const SOCKET_ENDPOINT_START = '/pulling/start?rate=2';
+const SOCKET_ENDPOINT_START = '/pulling/start';
 const SOCKET_ENDPOINT_STOP = '/pulling/stop';
 const GENERATE_BETS_ENDPOINT = '/bets-generate/';
 
@@ -16,25 +17,25 @@ const GENERATE_BETS_ENDPOINT = '/bets-generate/';
 export class CommunicationService {
   private lastBets = new Subject<{bets: ITransformedBet[], betsCount: number}>();
 
-
   constructor(
     public http: HttpClient,
     private socket: Socket
   ) {}
 
-  startSocketStream() {
-    this.http.get(BACKEND_URL + SOCKET_ENDPOINT_START).subscribe();
+  startSocketStream(rate?: number) {
+    rate = rate || 2;
+    const queryParams = `?rate=${rate}`;
+    this.http.get(BACKEND_URL + SOCKET_ENDPOINT_START + queryParams).subscribe();
     return this.socket.fromEvent<IBet[]>('bet-updated')
       .pipe(
         map((betsData) => {
           return this.transferToTable(betsData);
         })
       );
-
   }
 
   stopSocketStream() {
-    this.http.get(BACKEND_URL + SOCKET_ENDPOINT_STOP).subscribe();
+    return this.http.get(BACKEND_URL + SOCKET_ENDPOINT_STOP);
   }
 
   getBet(betId: number): Observable<ITransformedBet[]> {

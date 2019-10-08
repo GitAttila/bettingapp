@@ -10,11 +10,31 @@
   </mat-toolbar-row>
   <mat-toolbar-row class ="app-header__subheader mat-elevation-z2">
     <div class="container">
-        <span
+      <div class="app-header__subheader__menu">
+        <div
           [matBadge]=numOfBets
           [matBadgeHidden]=badgeHidden
           matBadgeOverlap="false"
-          matBadgeColor="accent">{{submenuTitle}}</span>
+          matBadgeColor="accent">{{submenuTitle}}
+        </div>
+        <div>
+          <button mat-icon-button [matMenuTriggerFor]="langmenu">
+            <mat-icon>language</mat-icon>
+          </button>
+          <mat-menu #langmenu="matMenu">
+            <button
+              mat-menu-item
+              (click) = "onLangSelect('en')">
+              <span [ngClass]="{'lang__item--selected': langSelected.en}">english</span>
+            </button>
+            <button
+              (click) = "onLangSelect('cz')"
+              mat-menu-item>
+              <span [ngClass]="{'lang__item--selected': langSelected.cz}">czech</span>
+            </button>
+          </mat-menu>
+        </div>
+      </div>
     </div>
   </mat-toolbar-row>
 </mat-toolbar>

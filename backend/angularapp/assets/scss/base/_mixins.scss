@@ -1,0 +1,47 @@
+@mixin atExtraSmallLandscape {
+  @media (min-width: 480px) and (orientation: landscape) {
+      @content;
+  }
+}
+
+@mixin atExtraSmall {
+  @media (min-width: 480px) {
+      @content;
+  }
+}
+
+@mixin atSmall {
+  @media (min-width: 576px) {
+      @content;
+  }
+}
+
+@mixin atSmallLandscape {
+  @media (min-width: 576px) and (orientation: landscape) {
+      @content;
+  }
+}
+
+@mixin atMedium {
+  @media (min-width: 768px) {
+      @content;
+  }
+}
+
+@mixin atMediumLandscape {
+  @media (min-width: 768px) and (orientation: landscape) {
+      @content;
+  }
+}
+
+@mixin atLarge {
+  @media (min-width: 992px) {
+      @content;
+  }
+}
+
+@mixin atExtraLarge {
+  @media (min-width: 1200px) {
+      @content;
+  }
+}

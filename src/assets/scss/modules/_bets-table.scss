@@ -13,15 +13,27 @@
   }
   &__menu{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    @include atMedium {
+      flex-direction: row;
+    }
     mat-slider {
       min-width: 300px;
     }
     &__btn-group {
+      text-align: center;
+      margin-bottom: 1rem;
+      @include atMedium {
+        text-align: left;
+        margin-bottom: 0;
+      }
       button {
-        margin-left: 1rem;
+        margin-left: 0;
+        @include atMedium {
+          margin-left: 1rem;
+        }
       }
     }
   }
