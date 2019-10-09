@@ -7,4 +7,9 @@ export interface ITransformedBet {
   home: number;
   away: number;
   teams: IBetItem[];
+  updated: {
+    draw: boolean;
+    home: boolean;
+    away: boolean;
+  };
 }

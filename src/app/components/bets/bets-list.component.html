@@ -46,7 +46,7 @@
 
         <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
           <th mat-header-cell *matHeaderCellDef> {{column}} </th>
-          <td mat-cell *matCellDef="let element" [ngClass]="{'bets-table__item-highlighted': tableDataUpdated(element, column)}"> {{element[column]}}
+          <td mat-cell *matCellDef="let element" [ngClass]="{'bets-table__item-highlighted': tableDataUpdated(element, column)}"> {{element[column]}}  <!--[ngClass]="{'bets-table__item-highlighted': tableDataUpdated(element, column)}"-->
             <button
               *ngIf = "column === 'detail'"
               mat-icon-button

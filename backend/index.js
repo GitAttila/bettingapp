@@ -6,6 +6,7 @@ const io = require('socket.io')(http);
 const port = process.env.PORT || 3000;
 
 const BetFarmerBuilder = require('./BetFarm');
+const API_ENDPOINT = '/api';
 
 let betFarm = new BetFarmerBuilder(100);
 let PULLING_RATE = 3;
@@ -19,20 +20,16 @@ app.use((req, res, next) => {
   next();
 });
 
-// app.get('/',(req, resp) => {
-//   resp.json({ ok: 1 });
-// });
-
-app.get('/bets', (req, resp) => {
+app.get(API_ENDPOINT + '/bets', (req, resp) => {
   resp.json(betFarm.bets);
 });
 
-app.get('/bets/:id', (req, resp) => {
+app.get(API_ENDPOINT + '/bets/:id', (req, resp) => {
   const id = req.params.id;
   resp.json(betFarm.bets[id]);
 });
 
-app.get('/bets-generate', (req, resp) => {
+app.get(API_ENDPOINT + '/bets-generate', (req, resp) => {
   let { size } = req.query;
 
   size = Number(size);
@@ -46,7 +43,7 @@ app.get('/bets-generate', (req, resp) => {
   resp.json({ ok: 1, bets: betFarm.bets });
 });
 
-app.get('/pulling/start', (req, resp) => {
+app.get(API_ENDPOINT + '/pulling/start', (req, resp) => {
   let { rate } = req.query;
 
   rate = Number(rate);
@@ -64,7 +61,7 @@ app.get('/pulling/start', (req, resp) => {
   resp.json({ ok: 1 });
 });
 
-app.get('/pulling/stop', (req, resp) => {
+app.get(API_ENDPOINT + '/pulling/stop', (req, resp) => {
   betFarm.stopPulling();
   resp.json({ ok: 1 });
 });

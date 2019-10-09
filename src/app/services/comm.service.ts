@@ -8,10 +8,11 @@ import { Socket } from 'ngx-socket-io';
 import { environment } from '../../environments/environment';
 
 const BACKEND_URL = environment.socketConfig.url;
-const BETS_ENDPOINT = '/bets/';
-const SOCKET_ENDPOINT_START = '/pulling/start';
-const SOCKET_ENDPOINT_STOP = '/pulling/stop';
-const GENERATE_BETS_ENDPOINT = '/bets-generate/';
+const API_ENDPOINT = '/api';
+const BETS_ENDPOINT = API_ENDPOINT + '/bets/';
+const SOCKET_ENDPOINT_START = API_ENDPOINT + '/pulling/start';
+const SOCKET_ENDPOINT_STOP = API_ENDPOINT + '/pulling/stop';
+const GENERATE_BETS_ENDPOINT = API_ENDPOINT + '/bets-generate/';
 
 @Injectable()
 export class CommunicationService {
@@ -84,6 +85,11 @@ export class CommunicationService {
         draw: draw,
         home: home,
         away: away,
+        updated: {
+          draw: false,
+          home: false,
+          away: false
+        },
         teams: betItem.teams.map((team) => {
           return {
             description: team.description,

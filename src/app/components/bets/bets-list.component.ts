@@ -1,10 +1,10 @@
-import { Component, ViewEncapsulation, OnInit, OnDestroy, wtfLeave } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit, OnDestroy } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { IBet } from '../../models/bet.model';
 import { CommunicationService } from '../../services/comm.service';
 import { ITransformedBet } from '../../models/bet-transformed.model';
 import { Subscription } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import { delay, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-bets-list',
@@ -39,6 +39,7 @@ export class BetsListComponent implements OnInit, OnDestroy {
   constructor(public communicationSvc: CommunicationService) { }
 
   generateNewBets() {
+    this.isLoading = true;
     this.communicationSvc.generateNewSetOfBets(this.slider.value);
   }
 
@@ -48,17 +49,19 @@ export class BetsListComponent implements OnInit, OnDestroy {
         () => {
           this.btnLivePullText = 'BETS.BTN_LIVE_START';
           this.subStream.unsubscribe();
-          this.dataBeforeChange = this.dataSource;
         }
       );
     } else if (this.btnLivePullText === 'BETS.BTN_LIVE_START') {
       this.btnLivePullText = 'BETS.BTN_LIVE_STOP';
       this.subStream = this.communicationSvc.startSocketStream()
+        .pipe(
+          map((betsData) => {
+            return this.updateTableData(betsData);
+          })
+        )
         .subscribe(
-          (data) => {
-            this.dataBeforeChange = this.dataSource;
-            const updatedData = this.updateTableData(data);
-            this.dataSource = updatedData;
+          (betsData) => {
+            this.dataSource = betsData;
           }
         );
     }
@@ -75,7 +78,12 @@ export class BetsListComponent implements OnInit, OnDestroy {
           id: foundItem.id,
           draw: foundItem.draw,
           home: foundItem.home,
-          away: foundItem.away
+          away: foundItem.away,
+          updated: {
+            draw: true,
+            home: true,
+            away: true
+          }
         };
       } else {
         res = {
@@ -85,6 +93,11 @@ export class BetsListComponent implements OnInit, OnDestroy {
           draw: itemDataSource.draw,
           home: itemDataSource.home,
           away: itemDataSource.away,
+          updated: {
+            draw: false,
+            home: false,
+            away: false
+          }
         };
       }
       return res;
@@ -93,10 +106,7 @@ export class BetsListComponent implements OnInit, OnDestroy {
 
   tableDataUpdated(el, col) {
     if (col !== 'match' && col !== 'detail') {
-      if (el[col] !== this.dataBeforeChange[el.id][col]) {
-        return true;
-      }
-      return false;
+      return el.updated[col];
     }
   }
 
@@ -108,7 +118,6 @@ export class BetsListComponent implements OnInit, OnDestroy {
       )
       .subscribe((betsData: {bets: ITransformedBet[], betsCount: number}) => {
         this.dataSource = betsData.bets;
-        this.dataBeforeChange = this.dataSource;
         this.slider.value = betsData.betsCount;
         this.isLoading = false;
       });
