@@ -56,6 +56,7 @@ export class BetsListComponent implements OnInit, OnDestroy {
       this.subStream = this.communicationSvc.startSocketStream()
         .pipe(
           map((betsData) => {
+            console.log(betsData);
             return this.updateTableData(betsData);
           })
         )
@@ -80,9 +81,9 @@ export class BetsListComponent implements OnInit, OnDestroy {
           home: foundItem.home,
           away: foundItem.away,
           updated: {
-            draw: true,
-            home: true,
-            away: true
+            draw: foundItem.draw !== itemDataSource.draw,
+            home: foundItem.home !== itemDataSource.home,
+            away: foundItem.away !== itemDataSource.away
           }
         };
       } else {
